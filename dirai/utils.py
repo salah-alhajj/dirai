@@ -49,12 +49,16 @@ def redact_sensitive_data(line: str, ignore_variables: list, redaction_patterns:
 
 def validate_config(config: dict) -> None:
     """Validate configuration parameters"""
+    if 'default' not in config:
+        raise ValueError("Missing default profile in config")
+        
     required_keys = ['exclude', 'output']
     for key in required_keys:
-        if key not in config.get('default', {}): # fix: check in default profile
+        if key not in config['default']:
             raise ValueError(f"Missing required config key: {key}")
 
-    if config.get('max_depth', 0) < 0:
+    max_depth = config['default'].get('max_depth')
+    if max_depth is not None and max_depth < 0:
         raise ValueError("max_depth cannot be negative")
 
 def display_error(message: str, exit_code: int = 1) -> None:

@@ -25,7 +25,7 @@ def main():
         # Run all profiles from the config file
         profiles = config_handler.get_profile_names()
     else:
-        profiles = args.profiles or [args.profile]
+        profiles = args.profiles 
 
     for profile_name in profiles:
         run_profile(profile_name, config_handler, args)
@@ -34,13 +34,12 @@ def parse_arguments(config_handler):
     parser = argparse.ArgumentParser(
         prog="dirai",
         description="DIRAI - Smart Directory Structure Analysis",
-        epilog="Example: dirai --profile web --output structure.md\n"
+        epilog="Example: dirai --profiles web --output structure.md\n"
                "Configuration file: ~/.dirai.yaml or current directory"
     )
     
-    parser.add_argument("-p", "--profile", default="all",
-                        help="Configuration profile to use")
-    parser.add_argument("--profiles", nargs='+',default='all',
+
+    parser.add_argument("-p","--profiles", nargs='+',default='all',
                         help="Run multiple profiles sequentially. Use 'all' to run all profiles from config")
     parser.add_argument("-d", "--directory", default=".",
                         help="Target directory to analyze")
@@ -66,15 +65,19 @@ def parse_arguments(config_handler):
     return parser.parse_args()
 
 def run_profile(profile_name, config_handler, cli_args):
+    """Run a single profile with the given configuration"""
     base_config = config_handler.get_profile(profile_name)
     
+    # Convert cli_args to dictionary and filter out None values
     cli_args_dict = {k: v for k, v in vars(cli_args).items() if v is not None}
     
+    # Merge base config with CLI args
     config = {**base_config, **cli_args_dict}
     
+    # Special handling for list fields
     for list_field in ['exclude', 'include', 'gitignore_paths']:
         if list_field in cli_args_dict and list_field in base_config:
-            config[list_field] = base_config[list_field] + cli_args_dict.get(list_field, [])
+            config[list_field] = base_config[list_field] + (cli_args_dict[list_field] or [])
     
     scanner = DirectoryScanner(config)
     structure = scanner.generate_structure(config['directory'])

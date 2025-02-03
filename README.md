@@ -1,6 +1,6 @@
 # 🤖 DIRAI: Your AI-Powered Directory Navigator 🚀
 
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg) [![PyPI version](https://badge.fury.io/py/dirai-tool.svg)](https://badge.fury.io/py/dirai) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg) [![PyPI version](https://badge.fury.io/py/dirai-tool.svg)](https://badge.fury.io/py/dirai-tool) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Unveiling the Magic of Your Project's Structure ✨
 
@@ -55,8 +55,7 @@ dirai [OPTIONS]
 
 | Option             | Description                                                                                    | Default    |
 | :----------------- | :--------------------------------------------------------------------------------------------- | :--------- |
-| `-p`, `--profile`   | Select your configuration profile                                                              | `default`  |
-| `--profiles`       | Run multiple profiles sequentially. Use 'all' for a config file profiles                        | `all`      |
+| `-p`, `--profiles`      | Run multiple profiles sequentially. Use 'all' for a config file profiles                        | `all`      |
 | `-d`, `--directory` | Specify the target directory                                                                   | `.`        |
 | `-o`, `--output`    | Choose the output file name                                                                    | (profile)  |
 | `-x`, `--exclude`   | Apply exclusion patterns (gitignore style!)                                                    | (profile)  |

@@ -35,8 +35,6 @@ DEFAULT_CONFIG = {
             r'apisecret',
             r'apipassword',
             r'apiusername',
-            
-    
         ]
     }
 }
