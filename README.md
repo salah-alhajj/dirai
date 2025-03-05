@@ -38,7 +38,7 @@
 2. **Install with pip:**
 
     ```bash
-    pip install dirai
+    pip install dirai-tool
     ```
 
     Boom! DIRAI is now at your fingertips, ready to serve as a command-line companion.
